@@ -1,0 +1,60 @@
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* color: black; */
+    color: white;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+}
+
+.block {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1,
+h2 {
+    color: white;
+    -webkit-text-stroke: 3px black;
+    paint-order: stroke fill;
+}
+
+#header h1 {
+    margin: 0 auto;
+    font-size: 5em;
+    text-shadow: 0px 0px 100px black;
+
+}
+
+#header {
+    background: url("./assets/Tunka-HiSCORE.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+#header .block-content {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.next {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+a {
+    font-size: 3em;
+    color: white;
+}
