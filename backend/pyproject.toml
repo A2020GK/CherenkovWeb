@@ -1,0 +1,14 @@
+[project]
+name = "CherenkovWeb"
+version = "0.0.1"
+dependencies = [
+    "fastapi[standard-no-fastapi-cloud-cli]==0.143.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
+
+[tool.fastapi]
+entrypoint = "app.main:app"
