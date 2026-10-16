@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Отладчик Python: Модуль",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "fastapi",
+            "args": ["dev"],
+            "cwd": "${workspaceFolder}/backend"
+        },
+        {
             "name": "Launch Vite Server",
             "request": "launch",
             "runtimeExecutable": "npx",

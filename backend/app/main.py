@@ -9,6 +9,10 @@ announce_paths()
 
 app = FastAPI()
 
+from .routers import telescope
+
 @app.get("/")
 async def read_root():
     return {"Hello": "World"}
+
+app.include_router(telescope.router)
