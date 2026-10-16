@@ -4,7 +4,24 @@
     // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+        {
+            "name": "Launch Vite Server",
+            "request": "launch",
+            "runtimeExecutable": "npx",
+            "runtimeArgs": [
+                "vite",
+                "--port",
+                "4000"
+            ],
+            "cwd": "${workspaceFolder}/frontend",
+            "type": "node",
+            "serverReadyAction": {
+                "action": "debugWithEdge",
+                "killOnServerStop": true,
+                "pattern": "Local:\\s+http://localhost:([0-9]+)",
+                "uriFormat": "http://localhost:%s",
+            }
+        },
         {
             "type": "editor-browser",
             "request": "launch",
