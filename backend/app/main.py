@@ -1,5 +1,12 @@
 from fastapi import FastAPI
 
+from .logging import *
+logger = logging.getLogger(__name__)
+logger.info("Starting CherenkovWeb Backend")
+
+from .config import config, ROOT, announce_paths
+announce_paths()
+
 app = FastAPI()
 
 @app.get("/")
