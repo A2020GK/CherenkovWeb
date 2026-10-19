@@ -2,6 +2,7 @@ from fastapi import APIRouter
 
 router = APIRouter(prefix="/telescope", tags=["Telescope"])
 
+
 @router.get("/list")
 async def get_telescopes():
     """Get a list of all telescopes."""
