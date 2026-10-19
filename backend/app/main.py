@@ -7,6 +7,9 @@ logger.info("Starting CherenkovWeb Backend")
 from .config import config, ROOT, announce_paths
 announce_paths()
 
+from .telescope import load_telescopes
+load_telescopes()
+
 app = FastAPI()
 
 from .routers import telescope
