@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Отладчик Python: Модуль",
+            "name": "Launch FastAPI Server",
             "type": "debugpy",
             "request": "launch",
             "module": "fastapi",
