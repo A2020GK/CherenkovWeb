@@ -1,58 +1,31 @@
 from __future__ import annotations
 
 import importlib
-import pkgutil
-from abc import ABC, abstractmethod
+from collections.abc import Iterator
 from pathlib import Path
-from typing import ClassVar
 
 from .config import config
+from .models import Telescope
 
 DATA_DIR = config.data_dir
+TELESCOPES_DIR = Path(__file__).parent / "telescopes"
 
 
-class BaseEvent(ABC):
-    """Base class for events"""
-
-    name: str
-
-    @abstractmethod
-    def get_data(self):
-        """Return this event's data in a JSON-serializable form."""
+TELESCOPE_REGISTRY: dict[str, type[Telescope]] = {}
 
 
-class BaseTelescope(ABC):
-    """Base class for telescope plugins.
-
-    A plugin declares ``name`` and ``display_name`` and implements
-    ``get_events``.
-    """
-
-    name: ClassVar[str]
-    display_name: ClassVar[str]
-
-    @abstractmethod
-    def get_events(self) -> list[BaseEvent]:
-        """Return the events recorded by this telescope."""
-
-
-TELESCOPE_REGISTRY: dict[str, type[BaseTelescope]] = {}
-
-
-def register_telescope(cls: type[BaseTelescope]) -> type[BaseTelescope]:
+def register_telescope(cls: type[Telescope]) -> type[Telescope]:
     """Class decorator that adds a telescope plugin to the registry."""
-    if not getattr(cls, "name", None):
-        raise TypeError(f"{cls.__name__} must define a non-empty 'name'")
-    if not getattr(cls, "display_name", None):
-        raise TypeError(f"{cls.__name__} must define a non-empty 'display_name'")
-    if cls.name in TELESCOPE_REGISTRY:
-        raise ValueError(f"Telescope {cls.name!r} already registered")
 
-    TELESCOPE_REGISTRY[cls.name] = cls
+    name = cls.model_fields["name"].default
+    if not isinstance(name, str) or not name:
+        raise TypeError(f"{cls.__name__} must set a default 'name'")
+
+    TELESCOPE_REGISTRY[name] = cls
     return cls
 
 
-def get_telescope(name: str) -> BaseTelescope:
+def get_telescope(name: str) -> Telescope:
     """Instantiate the telescope registered under ``name``."""
     try:
         cls = TELESCOPE_REGISTRY[name]
@@ -64,16 +37,32 @@ def get_telescope(name: str) -> BaseTelescope:
 _loaded = False
 
 
+def _iter_plugin_modules() -> Iterator[str]:
+    """Yield the dotted paths of every plugin module, including subfolders."""
+    base = f"{__package__}.telescopes"
+
+    for path in sorted(TELESCOPES_DIR.rglob("*.py")):
+        parts = list(path.relative_to(TELESCOPES_DIR).with_suffix("").parts)
+
+        if parts[-1] == "__init__":
+            parts.pop()
+            if not parts:
+                # The ``telescopes`` package itself is already imported.
+                continue
+
+        if any(part.startswith(("_", ".")) for part in parts):
+            continue
+
+        yield ".".join([base, *parts])
+
+
 def load_telescopes() -> None:
     """Import every plugin module in the ``telescopes`` package."""
     global _loaded
     if _loaded:
         return
 
-    plugins_dir = Path(__file__).parent / "telescopes"
-    for module in pkgutil.iter_modules([str(plugins_dir)]):
-        if module.name.startswith("_"):
-            continue
-        importlib.import_module(f"{__package__}.telescopes.{module.name}")
+    for module_name in _iter_plugin_modules():
+        importlib.import_module(module_name)
 
     _loaded = True
