@@ -36,5 +36,14 @@
             "name": "Launch landing website",
             "url": "http://localhost:5500/docs"
         }
+    ],
+    "compounds": [
+        {
+            "name": "Fullstack Debug",
+            "configurations": [
+                "Launch FastAPI Server",
+                "Launch Vite Server"
+            ]
+        }
     ]
 }
