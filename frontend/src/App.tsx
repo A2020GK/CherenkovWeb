@@ -32,7 +32,7 @@ export const App = () => {
     <>
       <Header telescope={telescope} setTelescope={setTelescope} />
       <main>
-        <TelescopeLayout telescope={telescope} />
+        <TelescopeLayout telescope={telescope} key={telescope} />
       </main>
     </>
   );
