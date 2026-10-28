@@ -15,6 +15,9 @@ class TelescopeLayout(BaseSchema):
     pixels: list[Pixel]
     channels: list[str] | None = None
 
+    pixel_size: int
+    pixel_group_size: int | None = None
+
 class PixelGroup(BaseSchema):
     name: str
     x: float

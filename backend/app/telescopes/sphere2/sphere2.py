@@ -16,6 +16,7 @@ class Sphere2Telescope(Telescope):
         )
 
         return TelescopeLayout(
+            pixel_size=20,
             pixels=[
                 Pixel(
                     name=f"{row['ch']:g}",

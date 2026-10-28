@@ -14,17 +14,19 @@ export const TelescopeSelector = ({
   });
 
   return (
-    <select
-      value={telescope ?? ""}
-      onChange={(e) => setTelescope(e.target.value || null)}
-    >
-      {isLoading && <option disabled>Loading...</option>}
-      {isError && <option disabled>Error loading telescopes</option>}
-      {data?.map((telescope) => (
-        <option key={telescope.name} value={telescope.name}>
-          {telescope.displayName}
-        </option>
-      ))}
-    </select>
+    <div>
+      <select
+        value={telescope ?? ""}
+        onChange={(e) => setTelescope(e.target.value || null)}
+      >
+        {isLoading && <option disabled>Loading...</option>}
+        {isError && <option disabled>Error loading telescopes</option>}
+        {data?.map((telescope) => (
+          <option key={telescope.name} value={telescope.name}>
+            {telescope.displayName}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };

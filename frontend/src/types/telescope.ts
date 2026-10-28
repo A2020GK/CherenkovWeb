@@ -8,6 +8,9 @@ export interface TelescopeLayout {
   pixelGroups: PixelGroup[] | null;
   pixels: Pixel[] | null;
   channels: Channel[] | null;
+
+  pixelSize: number;
+  pixelGroupSize: number | null;
 }
 
 export type Channel = string;
