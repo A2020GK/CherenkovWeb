@@ -11,6 +11,7 @@ export const TelescopeSelector = ({
   const { data, isLoading, isError } = useQuery({
     queryKey: ["telescopes"],
     queryFn: getTelescopes,
+    staleTime: "static"
   });
 
   return (

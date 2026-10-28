@@ -9,6 +9,7 @@ export const App = () => {
   const { data } = useQuery({
     queryKey: ["telescopes"],
     queryFn: getTelescopes,
+    staleTime: "static"
   });
 
   const [telescope, setTelescope] = useLocalStorage<string | null>(
