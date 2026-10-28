@@ -3,6 +3,17 @@ import { useQuery } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { getTelescopeLayout } from "../api/telescope";
+import type { Pixel } from "../types/telescope";
+
+const HEX_ROT = Math.PI / 2;
+
+const HEX_UNIT = Array.from({ length: 6 }, (_, i) => {
+  const a = (Math.PI / 3) * i + HEX_ROT;
+  return [Math.cos(a), Math.sin(a)] as const;
+});
+
+const hexPoints = (cx: number, cy: number, r: number) =>
+  HEX_UNIT.map(([ux, uy]) => `${cx + r * ux},${cy + r * uy}`).join(" ");
 
 export const TelescopeLayout = ({
   telescope,
@@ -108,6 +119,27 @@ export const TelescopeLayout = ({
     applyTransform();
   };
 
+  const renderShape = (pixel: Pixel) => {
+    switch (data.pixelShape) {
+      case "hexagon":
+        return (
+          <polygon
+            className="pixel-shape"
+            points={hexPoints(pixel.x, pixel.y, pixelSize)}
+          />
+        );
+      case "circle":
+        return (
+          <circle
+            className="pixel-shape"
+            cx={pixel.x}
+            cy={pixel.y}
+            r={pixelSize}
+          />
+        );
+    }
+  };
+
   return (
     <div className="telescope-layout">
       <svg
@@ -122,7 +154,7 @@ export const TelescopeLayout = ({
         <g ref={setPixelsRef} className="pixels">
           {data.pixels.map((pixel, index) => (
             <g key={index}>
-              <circle cx={pixel.x} cy={pixel.y} r={pixelSize} fill="black" />
+              {renderShape(pixel)}
               <text
                 x={pixel.x}
                 y={pixel.y}

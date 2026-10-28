@@ -1,3 +1,5 @@
+from typing import Literal
+
 from .utils import BaseSchema
 
 
@@ -15,13 +17,14 @@ class TelescopeLayout(BaseSchema):
     pixels: list[Pixel]
     channels: list[str] | None = None
 
-    pixel_size: int
-    pixel_group_size: int | None = None
+    pixel_size: float | None = None
+    pixel_group_size: float | None = None
+    pixel_shape: Literal["circle", "hexagon"]
 
 class PixelGroup(BaseSchema):
     name: str
-    x: float
-    y: float
+    x: float | None = None
+    y: float | None = None
     board: int | None = None # Index
 
 class Pixel(BaseSchema):

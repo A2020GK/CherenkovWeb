@@ -42,5 +42,6 @@ class Sphere3Telescope(Telescope):
         return TelescopeLayout(
             pixel_groups=pixel_groups,
             pixels=pixels,
-            pixel_size=5
+            pixel_size=5,
+            pixel_shape="circle",
         )
