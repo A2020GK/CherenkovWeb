@@ -1,0 +1,29 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Setup environment (dev)",
+            "type": "shell",
+            "command": "./scripts/setup-dev.sh",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "lint",
+            "path": "frontend",
+            "problemMatcher": [],
+            "label": "npm: lint - frontend",
+            "detail": "eslint ."
+        },
+        {
+            "type": "npm",
+            "script": "format",
+            "path": "frontend",
+            "problemMatcher": [],
+            "label": "npm: format - frontend",
+            "detail": "prettier --write ."
+        }
+    ]
+}

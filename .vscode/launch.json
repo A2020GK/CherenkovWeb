@@ -43,7 +43,8 @@
             "configurations": [
                 "Launch FastAPI Server",
                 "Launch Vite Server"
-            ]
+            ],
+            "preLaunchTask": "Setup environment (dev)"
         }
     ]
 }
