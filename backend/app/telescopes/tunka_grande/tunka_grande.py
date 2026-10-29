@@ -26,7 +26,7 @@ class TunkaGrande(Telescope):
 
         return TelescopeLayout(
             pixels=pixels,
-            pixel_size=75,
-            pixel_shape="circle",
+            pixel_size=50,
+            pixel_shape="square",
             channels=[f"ch{i+1}" for i in range(16)]
         )

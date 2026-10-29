@@ -19,7 +19,7 @@ class TelescopeLayout(BaseSchema):
 
     pixel_size: float | None = None
     pixel_group_size: float | None = None
-    pixel_shape: Literal["circle", "hexagon"]
+    pixel_shape: Literal["circle", "hexagon", "square"]
 
 class PixelGroup(BaseSchema):
     name: str

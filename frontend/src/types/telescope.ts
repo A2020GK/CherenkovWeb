@@ -11,7 +11,7 @@ export interface TelescopeLayout {
 
   pixelSize: number;
   pixelGroupSize: number | null;
-  pixelShape: "circle" | "hexagon";
+  pixelShape: "circle" | "hexagon" | "square";
 }
 
 export type Channel = string;

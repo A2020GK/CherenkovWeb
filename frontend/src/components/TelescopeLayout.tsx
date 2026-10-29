@@ -30,6 +30,9 @@ export const TelescopeLayout = ({
     queryFn: () => getTelescopeLayout(telescope!),
     enabled: !!telescope,
     staleTime: "static",
+    // Drop the layout from the cache as soon as it is no longer displayed,
+    // so only the selected telescope's layout is kept in memory.
+    gcTime: 0,
   });
 
   const applyTransform = () => {
@@ -135,6 +138,16 @@ export const TelescopeLayout = ({
             cx={pixel.x}
             cy={pixel.y}
             r={pixelSize}
+          />
+        );
+      case "square":
+        return (
+          <rect
+            className="pixel-shape"
+            x={pixel.x - pixelSize}
+            y={pixel.y - pixelSize}
+            width={pixelSize * 2}
+            height={pixelSize * 2}
           />
         );
     }
