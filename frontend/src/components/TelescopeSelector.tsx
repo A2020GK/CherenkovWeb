@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { faFloppyDisk, faRotate } from "@fortawesome/free-solid-svg-icons";
 import { getTelescopes } from "../api/telescope";
 import { Dropdown, type DropdownEntry } from "./Dropdown";
 
@@ -41,23 +40,25 @@ export const TelescopeSelector = ({
     });
   });
 
-  options.push(
-    { type: "separator" },
-    {
-      type: "toggle",
-      value: "save-layouts",
-      label: "Dummy-toggle",
-      icon: faFloppyDisk,
-      checked: false,
-    },
-    {
-      type: "action",
-      value: "reload-layout",
-      label: "Dummy-action",
-      icon: faRotate,
-      disabled: !telescope,
-    },
-  );
+  // options.push(
+  //   { type: "separator" },
+  //   {
+  //     type: "toggle",
+  //     value: "save-layouts",
+  //     label: "Dummy-toggle",
+  //     icon: faFloppyDisk,
+  //     checked: false,
+  //   },
+  //   {
+  //     type: "action",
+  //     value: "reload-layout",
+  //     label: "Dummy-action",
+  //     icon: faRotate,
+  //     disabled: !telescope,
+  //   },
+  // );
+
+  // TODO: implement layouts caching in localStorage, layout reloading
 
   const handleSelect = (value: string) => {
     if (data?.some((item) => item.name === value)) {
