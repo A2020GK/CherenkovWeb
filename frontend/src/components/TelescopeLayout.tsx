@@ -53,11 +53,11 @@ export const TelescopeLayout = ({
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Загрузка...</div>;
   }
 
   if (!data?.pixels?.length) {
-    return <div>No pixel data</div>;
+    return <div>Нет данных о пикселях</div>;
   }
 
   const pixelSize = data.pixelSize || 5;
@@ -186,7 +186,7 @@ export const TelescopeLayout = ({
         type="button"
         className="home-button"
         onClick={handleReset}
-        title="Reset view"
+        title="Сбросить отображение"
       >
         <FontAwesomeIcon icon={faCrosshairs} />
       </button>
