@@ -221,6 +221,8 @@ main {
   min-width: 0;
   cursor: grab;
   touch-action: none;
+  border: 1px solid var(--pixel-fill);
+  border-radius: 4px;
 }
 
 .telescope-layout > svg:active {
