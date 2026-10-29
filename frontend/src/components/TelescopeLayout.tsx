@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { getTelescopeLayout } from "../api/telescope";
-import type { Pixel } from "../types/telescope";
+import type { Pixel } from "../api/types";
 
 const HEX_ROT = Math.PI / 2;
 
@@ -61,7 +61,7 @@ export const TelescopeLayout = ({
   }
 
   const pixelSize = data.pixelSize || 5;
-  const padding = pixelSize * 1.5;
+  const padding = pixelSize * 2;
 
   const xs = data.pixels.map((p) => p.x);
   const ys = data.pixels.map((p) => p.y);
@@ -163,6 +163,7 @@ export const TelescopeLayout = ({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
+        onPointerLeave={handlePointerUp}
       >
         <g ref={setPixelsRef} className="pixels">
           {data.pixels.map((pixel, index) => (

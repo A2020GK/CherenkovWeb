@@ -63,7 +63,7 @@ header {
   gap: 10px;
 }
 
-header > :last-child {
+header> :last-child {
   margin-left: auto;
 }
 
@@ -211,21 +211,18 @@ main {
   min-height: 0;
   display: flex;
   align-self: stretch;
-  padding: 10px;
   position: relative;
 }
 
-.telescope-layout > svg {
+.telescope-layout>svg {
   display: block;
   flex: 1;
   min-width: 0;
   cursor: grab;
   touch-action: none;
-  border: 1px solid var(--pixel-fill);
-  border-radius: 4px;
 }
 
-.telescope-layout > svg:active {
+.telescope-layout>svg:active {
   cursor: grabbing;
 }
 
@@ -251,24 +248,42 @@ main {
   background-color: var(--home-button-bg-hover);
 }
 
-.pixels > g {
+.pixels>g {
   cursor: pointer;
 }
 
-.pixels > g > .pixel-shape {
+.pixels>g>.pixel-shape {
   fill: var(--pixel-fill);
   transition: fill 120ms ease;
 }
 
-.pixels > g > text {
+.pixels>g>text {
   fill: var(--pixel-text);
   transition: fill 120ms ease;
   user-select: none;
 }
 
-.pixels > g:hover > .pixel-shape {
+.pixels>g:hover>.pixel-shape {
   fill: var(--pixel-hover);
 }
-.pixels > g:hover > text {
+
+.pixels>g:hover>text {
   fill: var(--pixel-text-hover);
+}
+
+.panel {
+  display: flex;
+}
+.panel-separator {
+  width: 3px;
+  background-color: var(--dropdown-border);
+}
+
+.event-list {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

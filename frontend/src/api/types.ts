@@ -34,5 +34,8 @@ export interface Pixel {
 export interface Event {
   name: string;
   timestamp: number;
+}
+
+export interface EventData {
   data: number[];
 }

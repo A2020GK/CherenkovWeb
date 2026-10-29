@@ -1,4 +1,4 @@
-import type { Telescope, TelescopeLayout } from "../types/telescope";
+import type { Telescope, TelescopeLayout } from "./types";
 import { apiClient } from "./client";
 
 export const getTelescopes = async (): Promise<Telescope[]> => {

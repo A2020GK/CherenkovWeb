@@ -1,7 +1,7 @@
 import pandas as pd
+import os
 
-from .. import TELESCOPES_DIR, Pixel, Telescope, TelescopeLayout, register_telescope
-
+from .. import TELESCOPES_DIR, Pixel, Telescope, TelescopeLayout, register_telescope, DATA_DIR, Event
 
 @register_telescope
 class Sphere2Telescope(Telescope):
@@ -27,3 +27,7 @@ class Sphere2Telescope(Telescope):
                 for _, row in coords.iterrows()
             ]
         )
+        
+    @property
+    def event_list(self) -> list[Event]:
+        return [Event(name=name, timestamp=0.0) for name in os.listdir(DATA_DIR / "SPHERE2")]

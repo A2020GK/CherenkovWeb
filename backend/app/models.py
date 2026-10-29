@@ -37,4 +37,6 @@ class Pixel(BaseSchema):
 class Event(BaseSchema):
     name: str
     timestamp: float
+
+class EventData(BaseSchema):
     data: list[float]

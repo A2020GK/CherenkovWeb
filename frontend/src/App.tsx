@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getTelescopes } from "./api/telescope";
 import { TelescopeLayout } from "./components/TelescopeLayout";
 import { useEffect } from "react";
+import { Group, Panel, Separator } from "react-resizable-panels";
+import { EventList } from "./components/EventList";
 
 export const App = () => {
   const { data } = useQuery({
@@ -33,8 +35,18 @@ export const App = () => {
     <>
       <Header telescope={telescope} setTelescope={setTelescope} />
       <main>
-        <TelescopeLayout telescope={telescope} key={telescope} />
-      </main>
+        <Group className="panel-group">
+          <Panel className="panel" collapsible defaultSize="25%" minSize={100} maxSize="50%">
+            <EventList telescope={telescope} />
+          </Panel>
+
+          <Separator className="panel-separator"/>
+
+          <Panel className="panel">
+            <TelescopeLayout telescope={telescope} key={telescope} />
+          </Panel>
+        </Group >
+      </main >
     </>
   );
 };
