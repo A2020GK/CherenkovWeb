@@ -32,4 +32,5 @@ class HiSCORETelescope(Telescope):
             pixels=pixels,
             pixel_size=50,
             pixel_shape="circle",
+            channels=["a1", "a2", "a3", "a4", "d1", "d2", "d3", "d4", "trigger"]
         )
