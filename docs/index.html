@@ -4,24 +4,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Веб-приложение для визуализации данных атмосферных черенковских телескопов &bull; CherenkovWeb</title>
+    <title>CherenkovWeb</title>
+    <meta name="description"
+        content="Веб-приложение для визуализации данных установок, измеряющих параметры Широких Атмосферных Ливней (ШАЛ)">
+    <link rel="icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <main>
-        <div class="block" id="header">
-            <div class="block-content">
-                <h1>CherenkovWeb</h1>
-                <h2>Веб-приложение для визуализации данных атмосферных черенковских телескопов</h2>
-                <div class="next"><a href="#about">&#x2B9F;</a></div>
-            </div>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>CherenkovWeb</h1>
+            <p class="hero-subtitle">
+                Веб-приложение для визуализации данных установок, измеряющих параметры
+                <a href="https://ru.wikipedia.org/wiki/Широкие_атмосферные_ливни" target="_blank" rel="noopener">Широких
+                    Атмосферных Ливней (ШАЛ)</a>
+            </p>
+            <a class="scroll-link" href="#about" aria-label="Перейти к содержимому">&#8595;</a>
         </div>
-        <div class="block">
-            <a name="about"></a>
+    </header>
 
-            <h1> AHAHAHHA</h1>
-        </div>
+    <main>
+        <section class="section" id="about">
+            <h2>Цель проекта</h2>
+            <div class="card">
+                <p>
+                    Разработка веб-приложения CherenkovWeb, позволяющего визуализировать данные с установок,
+                    измеряющих параметры Широких Атмосферных Ливней
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Задачи</h2>
+
+            <ul class="task-list card">
+                <li>Разработать формат данных, к которому можно было бы привести данные всех установок</li>
+                <li>Спроектировать клиент-серверную архитектуру с модульным бэкендом для возможности быстро добавлять
+                    новые установки, не зная внутреннего устройства приложения</li>
+                <li>Разработать гибкий веб-интерфейс с различными видами визуализации данных: тепловая карта, графики
+                </li>
+                <li>Добавить в приложение основные установки комплекса <a
+                        href="https://ru.wikipedia.org/wiki/Тункинский_эксперимент" target="_blank"
+                        rel="noopener">TAIGA</a></li>
+                <li>Уточнить возможность развертывания итогового продукта на сервере заказчика, что может дать
+                    возможность прямого доступа к данных с установок в реальном времени</li>
+            </ul>
+
+            <div class="telescopes">
+                <article class="telescope">
+                    <p class="telescope-caption">HiSCORE</p>
+                    <div class="telescope-images">
+                        <div class="image">
+                            <div class="image-frame">
+                                <img src="assets/hiscore.png" alt="Установка HiSCORE" loading="lazy">
+                            </div>
+                        </div>
+
+                        <span class="arrow" aria-hidden="true">&#8594;</span>
+
+                        <div class="image">
+                            <div class="image-frame image-frame-cw">
+                                <img src="assets/hiscore-cw.png" alt="Мозаика HiSCORE в CherenkovWeb" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="telescope">
+                    <p class="telescope-caption">IACT1</p>
+                    <div class="telescope-images">
+                        <div class="image">
+                            <div class="image-frame">
+                                <img src="assets/iact.png" alt="Установка IACT1" loading="lazy">
+                            </div>
+                        </div>
+
+                        <span class="arrow" aria-hidden="true">&#8594;</span>
+
+                        <div class="image">
+                            <div class="image-frame image-frame-cw">
+                                <img src="assets/iact-cw.png" alt="Мозаика IACT1 в CherenkovWeb" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="telescope">
+                    <p class="telescope-caption">СФЕРА-2</p>
+                    <div class="telescope-images">
+                        <div class="image">
+                            <div class="image-frame">
+                                <img src="assets/sphere2.png" alt="Установка СФЕРА-2" loading="lazy">
+                            </div>
+                        </div>
+
+                        <span class="arrow" aria-hidden="true">&#8594;</span>
+
+                        <div class="image">
+                            <div class="image-frame image-frame-cw">
+                                <img src="assets/sphere2-cw.png" alt="Мозаика СФЕРА-2 в CherenkovWeb" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="telescope">
+                    <p class="telescope-caption">СФЕРА-3</p>
+                    <div class="telescope-images">
+                        <div class="image">
+                            <div class="image-frame">
+                                <img src="assets/sphere3.png" alt="Установка СФЕРА-3" loading="lazy">
+                            </div>
+                        </div>
+
+                        <span class="arrow" aria-hidden="true">&#8594;</span>
+
+                        <div class="image">
+                            <div class="image-frame image-frame-cw">
+                                <img src="assets/sphere3-cw.png" alt="Мозаика СФЕРА-3 в CherenkovWeb" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section author-section">
+            <h2>Автор</h2>
+            <div class="card author-card">
+                <a class="author-link" href="https://github.com/A2020GK" target="_blank" rel="noopener">
+                    <img class="avatar" src="assets/logo.png" alt="Аватар Антония Карасева" width="72" height="72"
+                        loading="lazy">
+                    <span class="author-name">Антоний Карасев</span>
+                </a>
+                <p>(Карась)</p>
+            </div>
+        </section>
     </main>
 </body>
 

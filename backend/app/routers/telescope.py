@@ -37,4 +37,4 @@ async def get_telescope_events(telescope_name: str) -> list[Event]:
             detail=f"Telescope {telescope_name!r} not found",
         ) from exc
 
-    return telescope.event_list
+    return telescope.event_list or []
