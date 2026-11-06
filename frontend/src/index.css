@@ -63,7 +63,7 @@ header {
   gap: 10px;
 }
 
-header> :last-child {
+header > :last-child {
   margin-left: auto;
 }
 
@@ -214,7 +214,7 @@ main {
   position: relative;
 }
 
-.telescope-layout>svg {
+.telescope-layout > svg {
   display: block;
   flex: 1;
   min-width: 0;
@@ -222,7 +222,7 @@ main {
   touch-action: none;
 }
 
-.telescope-layout>svg:active {
+.telescope-layout > svg:active {
   cursor: grabbing;
 }
 
@@ -248,32 +248,32 @@ main {
   background-color: var(--home-button-bg-hover);
 }
 
-.pixels>g {
+.pixels > g {
   cursor: pointer;
 }
 
-.pixels>g>.pixel-shape {
-  fill: var(--pixel-fill);
+.pixels > g > .pixel-shape {
   transition: fill 120ms ease;
 }
 
-.pixels>g>text {
+.pixels > g > text {
   fill: var(--pixel-text);
   transition: fill 120ms ease;
   user-select: none;
 }
 
-.pixels>g:hover>.pixel-shape {
+.pixels > g:hover > .pixel-shape {
   fill: var(--pixel-hover);
 }
 
-.pixels>g:hover>text {
+.pixels > g:hover > text {
   fill: var(--pixel-text-hover);
 }
 
 .panel {
   display: flex;
 }
+
 .panel-separator {
   width: 3px;
   background-color: var(--dropdown-border);
@@ -286,4 +286,25 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.event-list ul {
+  list-style: none;
+  padding: 0;
+}
+.event-list li {
+  box-sizing: border-box;
+  margin: 10px;
+}
+.event-list button {
+  background-color: transparent;
+  border: none;
+  font-size: 1em;
+  border-radius: 10px;
+}
+.event-list button:hover {
+  color: var(--pixel-hover);
+}
+.event-list li.selected button {
+  border: 1px solid var(--pixel-hover);
 }

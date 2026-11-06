@@ -19,6 +19,11 @@ export const App = () => {
     null,
   );
 
+  const [eventName, setEventName] = useLocalStorage<string | null>(
+    "event",
+    null,
+  );
+
   useEffect(() => {
     if (!data?.length) return;
 
@@ -36,17 +41,32 @@ export const App = () => {
       <Header telescope={telescope} setTelescope={setTelescope} />
       <main>
         <Group className="panel-group">
-          <Panel className="panel" collapsible defaultSize="25%" minSize={100} maxSize="50%">
-            <EventList telescope={telescope} />
+          <Panel
+            className="panel"
+            collapsible
+            defaultSize="25%"
+            minSize={100}
+            maxSize="50%"
+          >
+            <EventList
+              telescope={telescope}
+              eventName={eventName}
+              setEventName={setEventName}
+              key={telescope}
+            />
           </Panel>
 
-          <Separator className="panel-separator"/>
+          <Separator className="panel-separator" />
 
           <Panel className="panel">
-            <TelescopeLayout telescope={telescope} key={telescope} />
+            <TelescopeLayout
+              telescope={telescope}
+              eventName={eventName}
+              key={telescope}
+            />
           </Panel>
-        </Group >
-      </main >
+        </Group>
+      </main>
     </>
   );
 };

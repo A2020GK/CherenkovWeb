@@ -11,6 +11,13 @@ class Telescope(BaseSchema):
     def layout(self) -> "TelescopeLayout":
         raise NotImplementedError("Subclasses must implement the 'layout' property.")
 
+    @property
+    def event_list(self) -> list["Event"]:
+        raise NotImplementedError("Subclasses must implement the 'layout' property.")
+
+    def get_event(self, name: str) -> "EventData":
+        raise NotImplementedError("Subclasses must implement the 'get_event' method.")
+
 class TelescopeLayout(BaseSchema):
     boards: int = 1
     pixel_groups: list["PixelGroup"] | None = None
@@ -39,4 +46,4 @@ class Event(BaseSchema):
     timestamp: float
 
 class EventData(BaseSchema):
-    data: list[float]
+    data: list[list[float]]

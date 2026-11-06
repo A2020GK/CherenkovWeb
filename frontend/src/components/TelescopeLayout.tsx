@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import { getTelescopeLayout } from "../api/telescope";
 import type { Pixel } from "../api/types";
+import { getEventData, getEventList } from "../api/event";
 
 const HEX_ROT = Math.PI / 2;
 
@@ -17,21 +18,40 @@ const hexPoints = (cx: number, cy: number, r: number) =>
 
 export const TelescopeLayout = ({
   telescope,
+  eventName,
 }: {
   telescope: string | null;
+  eventName: string | null;
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const pixelsRef = useRef<SVGGElement | null>(null);
   const transformRef = useRef({ x: 0, y: 0, scale: 1 });
   const dragRef = useRef<{ x: number; y: number } | null>(null);
 
+  const [defaultPixelFill, setDefaultPixelFill] = useState("darkgray");
+
+  useEffect(() => {
+    const cssColor = window
+      .getComputedStyle(document.querySelector(":root")!)
+      .getPropertyValue("--pixel-fill");
+    setDefaultPixelFill(cssColor);
+  });
+
   const { data, isLoading } = useQuery({
     queryKey: ["telescopeLayout", telescope],
-    queryFn: () => getTelescopeLayout(telescope!),
+    queryFn: async () => await getTelescopeLayout(telescope!),
     enabled: !!telescope,
     staleTime: "static",
     // Drop the layout from the cache as soon as it is no longer displayed,
     // so only the selected telescope's layout is kept in memory.
+    gcTime: 0,
+  });
+
+  const { data: eventData, isLoading: isEventLoading } = useQuery({
+    queryKey: ["event", eventName],
+    queryFn: async () => await getEventData(telescope!, eventName!),
+    enabled: !!telescope && !!eventName,
+    staleTime: "static",
     gcTime: 0,
   });
 
@@ -122,13 +142,51 @@ export const TelescopeLayout = ({
     applyTransform();
   };
 
-  const renderShape = (pixel: Pixel) => {
+  const COOLWARM: [number, number, number][] = [
+    [0, 0, 0], // blue
+    [255, 0, 0], // red
+  ];
+
+  const lerp = (a: number[], b: number[], t: number) =>
+    a.map((v, i) => Math.round(v + (b[i] - v) * t));
+
+  const samplePalette = (palette: number[][], t: number) => {
+    t = Math.min(1, Math.max(0, t));
+    const seg = t * (palette.length - 1);
+    const i = Math.min(Math.floor(seg), palette.length - 2);
+    const [r, g, b] = lerp(palette[i], palette[i + 1], seg - i);
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
+  const computeFillColor = (pixel: Pixel, index: number) => {
+    if (!eventName || !eventData?.data.length || isEventLoading) {
+      return defaultPixelFill;
+    }
+    const averages = eventData.data[0].map(
+      (_, col) =>
+        eventData.data.reduce(
+          (sum: number, row: number[]) => sum + row[col],
+          0,
+        ) / eventData.data.length,
+    );
+
+    const lo = Math.min(...averages);
+    const hi = Math.max(...averages);
+    const range = hi - lo || 1; // avoid /0 when all values are equal
+
+    return samplePalette(COOLWARM, (averages[index] - lo) / range);
+  };
+
+  const renderShape = (pixel: Pixel, fill: string) => {
+    console.log(data.pixels?.length, eventData?.data[0].length);
+
     switch (data.pixelShape) {
       case "hexagon":
         return (
           <polygon
             className="pixel-shape"
             points={hexPoints(pixel.x, pixel.y, pixelSize)}
+            fill={fill}
           />
         );
       case "circle":
@@ -138,6 +196,7 @@ export const TelescopeLayout = ({
             cx={pixel.x}
             cy={pixel.y}
             r={pixelSize}
+            fill={fill}
           />
         );
       case "square":
@@ -148,6 +207,7 @@ export const TelescopeLayout = ({
             y={pixel.y - pixelSize}
             width={pixelSize * 2}
             height={pixelSize * 2}
+            fill={fill}
           />
         );
     }
@@ -168,7 +228,7 @@ export const TelescopeLayout = ({
         <g ref={setPixelsRef} className="pixels">
           {data.pixels.map((pixel, index) => (
             <g key={index}>
-              {renderShape(pixel)}
+              {renderShape(pixel, computeFillColor(pixel, index))}
               <text
                 x={pixel.x}
                 y={pixel.y}

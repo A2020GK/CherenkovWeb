@@ -37,5 +37,5 @@ export interface Event {
 }
 
 export interface EventData {
-  data: number[];
+  data: number[][];
 }
