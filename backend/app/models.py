@@ -8,13 +8,13 @@ class Telescope(BaseSchema):
     display_name: str
 
     @property
-    def layout(self) -> TelescopeLayout:
+    def layout(self) -> "TelescopeLayout":
         raise NotImplementedError("Subclasses must implement the 'layout' property.")
 
 class TelescopeLayout(BaseSchema):
     boards: int = 1
-    pixel_groups: list[PixelGroup] | None = None
-    pixels: list[Pixel]
+    pixel_groups: list["PixelGroup"] | None = None
+    pixels: list["Pixel"]
     channels: list[str] | None = None
 
     pixel_size: float | None = None
