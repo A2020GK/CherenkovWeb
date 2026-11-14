@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from . import logging as app_logging  # noqa: F401  # configures logging on import
 from .config import announce_paths
-from .routers import telescope
+from .routers import event, telescope
 from .telescope import load_telescopes
 
 logger = logging.getLogger(__name__)
@@ -24,9 +24,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
-
-
 app.include_router(telescope.router)
+app.include_router(event.router)

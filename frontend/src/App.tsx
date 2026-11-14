@@ -24,6 +24,7 @@ export const App = () => {
     null,
   );
 
+  // Auto-select the first telescope if none is selected, or if the selected one is no longer available
   useEffect(() => {
     if (!data?.length) return;
 
