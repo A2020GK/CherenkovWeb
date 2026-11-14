@@ -21,6 +21,7 @@ class Config(BaseSettings):
     )
 
     data_dir: Path = Field(default=ROOT / "data")
+    event_cache_size: int = Field(default=32, ge=1)
 
 
 def announce_paths():

@@ -36,6 +36,6 @@ export interface Event {
   timestamp: number;
 }
 
-export interface EventData {
-  data: number[][];
-}
+export type EventSummary = number[];
+export type EventWaveform = number[][];
+export type EventData = number[][][];
