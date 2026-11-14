@@ -274,6 +274,12 @@ main {
   display: flex;
 }
 
+.panel-message {
+  margin: auto;
+  padding: 16px;
+  text-align: center;
+}
+
 .panel-separator {
   width: 3px;
   background-color: var(--dropdown-border);

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getEventList } from "../api/event";
+import { Loading } from "./Loading";
 
 export const EventList = ({
   telescope,
@@ -18,8 +19,14 @@ export const EventList = ({
   return (
     <div className="event-list">
       <h1>События</h1>
-      {isLoading && <div>Загрузка...</div>}
-      {!isLoading && data?.length === 0 && <div>Нет событий</div>}
+      {isLoading && (
+        <div className="panel-message">
+          <Loading />
+        </div>
+      )}
+      {!isLoading && data?.length === 0 && (
+        <div className="panel-message">Нет событий</div>
+      )}
       {!isLoading && data && data.length > 0 && (
         <ul>
           {data.map((event) => (
